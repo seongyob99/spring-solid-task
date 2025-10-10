@@ -15,12 +15,14 @@ public class IssueResponse {
         private final Long id;
         private final String title;
         private final IssueStatus status;
+        private final String reporterName;
 
         // 생성자를 private 선언
         private FindAll(Issue issue) {
             this.id = issue.getId();
             this.title = issue.getTitle();
             this.status = issue.getIssueStatus();
+            this.reporterName = issue.getReporter().getName();
         }
 
         // 정적 팩토리 메서드 선언 (제네릭 아님)
