@@ -29,6 +29,7 @@ public class UserRequest {
     @Getter
     @Setter
     public static class Login {
+
         @NotEmpty
         @Email
         private String email;

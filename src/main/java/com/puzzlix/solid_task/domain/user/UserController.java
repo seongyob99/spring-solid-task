@@ -24,9 +24,10 @@ public class UserController {
 
     @PostMapping("/login/{type}")
     public ResponseEntity<CommonResponseDto<?>> login(
-            @PathVariable String type,
+            @PathVariable(name = "type") String type,
             @Valid @RequestBody UserRequest.Login request) {
-
+        System.out.println(request.getEmail());
+        System.out.println(request.getPassword());
         User user = userService.login(type, request);
         // 사용자 이메일을 기반으로 JWT 토큰 생성
         String token = jwtTokenProvider.createToken(user.getEmail());

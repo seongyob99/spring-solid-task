@@ -48,8 +48,10 @@ public class UserService {
     @Transactional(readOnly = true)
     public User login(String type, UserRequest.Login request) {
         // 1. 팩토리에게 알맞은 로그인 전략을 요청
+
         LoginStrategy strategy = loginStrategyFactory.findStrategy(type);
         // 2. 해당 전략 클래스를 선택하여 로그인 요청 완료
+        System.out.println(22222222);
         return strategy.login(request);
     }
 }
