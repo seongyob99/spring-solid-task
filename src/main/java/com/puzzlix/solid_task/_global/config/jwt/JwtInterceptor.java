@@ -1,6 +1,7 @@
 
 package com.puzzlix.solid_task._global.config.jwt;
 
+import com.puzzlix.solid_task.domain.user.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,15 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 2. 순수 토큰 추출해서
         String token = resolveToken(request);
         if(token != null && jwtTokenProvider.validateToken(token)) {
-            // 결과값이 true 라면 controller 로 보낸다.
+            // 결과값이 true 라면 controller 로 보낸다
+
+            // request 이메일 정보
+            String userEmail = jwtTokenProvider.getSubject(token);
+            // request role
+            Role userRole = jwtTokenProvider.getRole(token);
+
+            request.setAttribute("userEmail", userEmail);
+            request.setAttribute("userEmail", userRole);
             return true;
         }
 
