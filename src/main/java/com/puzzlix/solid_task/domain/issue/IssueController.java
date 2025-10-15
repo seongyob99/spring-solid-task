@@ -22,11 +22,11 @@ public class IssueController {
 
     /**
     * 특정 이슈 상태 변경 api
-     *
-     * 주소설계 : localhost:8080/api/issues/{id}/status
+     * 주소설계 : localhost:8080/api/issues/{id}/status?=DONE
+     * HTTP 메세지
     */
     @PatchMapping("/{id}/status")
-    public ResponseEntity<CommonResponseDto<Issue>> updateIssueStatus(
+    public ResponseEntity<?> updateIssueStatus(
             @PathVariable(name = "id") Long issueId,
             @RequestParam("status") IssueStatus newStatus,
             @RequestAttribute("userEmail") String userEmail,
@@ -34,8 +34,9 @@ public class IssueController {
     ) {
         Issue issue = issueService.updateIssueStatus(issueId, newStatus, userEmail, userRole);
         // 서비스 호출
+        IssueResponse.FindById responseDto = new IssueResponse.FindById(issue);
         return ResponseEntity.ok(CommonResponseDto
-                .success(null, "이슈 상태가 성공적으로 변경되었습니다."));
+                .success(responseDto, "이슈 상태가 성공적으로 변경되었습니다."));
     }
 
 

@@ -1,11 +1,10 @@
 package com.puzzlix.solid_task.domain.project;
 
-import com.puzzlix.solid_task.domain.issue.Issue;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +19,4 @@ public class Project {
     private String name;
     private String description;
 
-    // fk X
-    @OneToMany(mappedBy = "project")
-    private List<Issue> issues = new ArrayList<>();
 }

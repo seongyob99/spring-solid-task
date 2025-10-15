@@ -29,7 +29,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             Role userRole = jwtTokenProvider.getRole(token);
 
             request.setAttribute("userEmail", userEmail);
-            request.setAttribute("userEmail", userRole);
+            request.setAttribute("userRole", userRole);
             return true;
         }
 
