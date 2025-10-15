@@ -31,6 +31,7 @@ public class IssueNotificationEventListener {
             // yml -> EMAIL,SMS
             NotificationSender sender = notificationSenderFactory.findSender(onStatusDoneType);
             // 이메일 구현 클래스던 sms 구현 클래스던 send 만 호출
+            String to = issue.getAssignee().getEmail(); // 이메일 발송 예시
             sender.send(message);
         }
     }

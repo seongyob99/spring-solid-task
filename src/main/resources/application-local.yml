@@ -47,3 +47,8 @@ notification:
   policy:
     # 이슈 상태가 DONE 으로 변경 되었을 때 사용할 알림 타입 지정
     on-status-done: SMS
+
+coolsms:
+  api-key: "NCSY93BCTUCCLPLE"
+  api-secret: "LNPRJFWJ5N6S473988DSPCBXUJI7GFPE"
+  fromNumber: "01062879963"
