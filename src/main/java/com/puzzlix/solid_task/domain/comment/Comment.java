@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @ToString(exclude = {"issue", "writer"}) // 순환 참조 방지 (양방향 매핑시 조심해야 할 부분)
 public class Comment {
     @Id
@@ -24,5 +25,4 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "writer_id")
     User writer;
-
 }

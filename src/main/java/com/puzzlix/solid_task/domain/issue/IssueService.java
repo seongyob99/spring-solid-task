@@ -32,10 +32,6 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueId)
                 .orElseThrow(() -> new NoSuchElementException("해당 ID의 이슈를 찾을 수 없습니다"));
 
-        // 관리자가 아니거나 담당자가 아니면 상태변경 못함
-//        if(userRole == Role.ADMIN && !issue.getAssignee().getEmail().equals(requestUserEmail)) {
-//            throw new SecurityException("이슈 상태를 변경할 권한이 없습니다");
-//        }
         if (userRole != Role.ADMIN &&
                 (issue.getAssignee() == null ||
                         !issue.getAssignee().getEmail().equals(requestUserEmail))) {
