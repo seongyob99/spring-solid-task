@@ -9,11 +9,13 @@ import com.puzzlix.solid_task.domain.user.User;
 import com.puzzlix.solid_task.domain.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -53,6 +55,7 @@ public class CommentService {
     }
 
     // 댓글 수정
+
     public Comment updateComment(Long commentId, CommentRequest request, String requestUserEmail) {
 
         User requestUser = userRepository.findByEmail(requestUserEmail)
@@ -60,6 +63,7 @@ public class CommentService {
 
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NoSuchElementException("해당 ID의 댓글을 찾을 수 없습니다."));
+
 
         // 인가 처리 (작성자만 수정 가능)
         if (!comment.getWriter().getId().equals(requestUser.getId())) {

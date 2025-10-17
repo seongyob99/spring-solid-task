@@ -4,26 +4,27 @@ import com.puzzlix.solid_task.domain.comment.dto.CommentRequest;
 import com.puzzlix.solid_task.domain.comment.dto.CommentResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
-@RequestMapping("/api/issues")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
 
     // 댓글 조회
-    @GetMapping("/{issueId}/comments")
+    @GetMapping("/issues/{issueId}/comments")
     public ResponseEntity<List<CommentResponse>> getComments(@PathVariable Long issueId) {
         return ResponseEntity.ok(commentService.findCommentsByIssue(issueId));
     }
 
 
     // 댓글 작성
-    @PostMapping("/{issueId}/comments")
+    @PostMapping("issues/{issueId}/comments")
     public ResponseEntity<CommentResponse> createComment(
             @PathVariable Long issueId,
             @RequestBody CommentRequest request,
@@ -35,7 +36,7 @@ public class CommentController {
     }
 
     // 댓글 수정
-    @PutMapping("/{issueId}/comments/{commentId}")
+    @PutMapping("/comments/{commentId}")
     public ResponseEntity<CommentResponse> updateComment(
             @PathVariable Long commentId,
             @RequestBody CommentRequest request,
@@ -47,7 +48,7 @@ public class CommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/{issueId}/comments/{commentId}")
+    @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<Void> deleteComment(
             @PathVariable Long commentId,
             HttpServletRequest httpRequest

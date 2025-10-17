@@ -1,5 +1,7 @@
 package com.puzzlix.solid_task._global.config;
 
+import com.puzzlix.solid_task.domain.comment.Comment;
+import com.puzzlix.solid_task.domain.comment.CommentRepository;
 import com.puzzlix.solid_task.domain.issue.Issue;
 import com.puzzlix.solid_task.domain.issue.IssueRepository;
 import com.puzzlix.solid_task.domain.issue.IssueStatus;
@@ -23,6 +25,7 @@ public class DataLoader implements CommandLineRunner {
     private final ProjectRepository projectRepository;
     private final IssueRepository issueRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CommentRepository commentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -56,6 +59,11 @@ public class DataLoader implements CommandLineRunner {
         issueRepository.save(new Issue(null, "검색 기능 구현 요청",
                 "이슈 전체 목록에 검색 기능이 필요합니다",
                 IssueStatus.TODO, testProject, testUser2, null, new ArrayList<>()));
+
+
+        commentRepository.save(new Comment(null, "테스트 댓글1", issueRepository.findById(1L).get(), testUser1));
+
+        commentRepository.save(new Comment(null, "테스트 댓글2", issueRepository.findById(2L).get(), testUser2));
 
     }
 }
